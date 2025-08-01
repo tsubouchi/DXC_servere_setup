@@ -1,116 +1,116 @@
-# DSL - AI Workflow Applications
+# DSL - AIワークフローアプリケーション
 
-This repository contains a collection of AI workflow applications built for the Dify platform. All applications are configured with Japanese language interfaces and designed for business automation tasks.
+このリポジトリには、Difyプラットフォーム用に構築されたAIワークフローアプリケーションのコレクションが含まれています。すべてのアプリケーションは日本語インターフェースで設定されており、ビジネス自動化タスク向けに設計されています。
 
-## 📁 Applications Overview
+## 📁 アプリケーション概要
 
-### 01_ビジネスアイデア (Business Idea Generation)
-- **Mode**: Completion
-- **Purpose**: Generate creative business ideas based on user input
-- **Features**: Simple AI completion with customizable parameters
+### 01_ビジネスアイデア
+- モード: Completion
+- 目的: ユーザー入力に基づいて創造的なビジネスアイデアを生成
+- 機能: カスタマイズ可能なパラメータを持つシンプルなAI補完
 
-### 02_社内規則 (Company Rules Chatbot)
-- **Mode**: Advanced Chat
-- **Purpose**: Knowledge-based chatbot for company rules and regulations
-- **Features**: RAG (Retrieval-Augmented Generation) with document upload support
+### 02_社内規則
+- モード: Advanced Chat
+- 目的: 社内規則や規制に関するナレッジベースチャットボット
+- 機能: ドキュメントアップロード対応のRAG（検索拡張生成）
 
-### 03_広告キャッチコピー (Advertisement Copy Creation)
-- **Mode**: Advanced Chat
-- **Purpose**: Create compelling advertisement copy and catchphrases
-- **Features**: Multi-step LLM workflow with iterative refinement
+### 03_広告キャッチコピー
+- モード: Advanced Chat
+- 目的: 魅力的な広告コピーとキャッチフレーズの作成
+- 機能: 反復的改良を伴う多段階LLMワークフロー
 
-### 04_プレスリリース (Press Release Creation)
-- **Mode**: Advanced Chat
-- **Purpose**: Generate professional press releases
-- **Features**: LLM feedback loop with structured output formatting
+### 04_プレスリリース
+- モード: Advanced Chat
+- 目的: プロフェッショナルなプレスリリースの生成
+- 機能: 構造化出力フォーマットを持つLLMフィードバックループ
 
-### 05_多言語対応チャットボット (Multilingual Chatbot)
-- **Mode**: Advanced Chat
-- **Purpose**: Multi-language conversation support
-- **Features**: Language detection and switching, conversation variables
+### 05_多言語対応チャットボット
+- モード: Advanced Chat
+- 目的: 多言語会話サポート
+- 機能: 言語検出と切り替え、会話変数
 
-### 06_注文書から情報抽出 (Order Information Extraction)
-- **Mode**: Advanced Chat
-- **Purpose**: Extract structured information from order documents
-- **Features**: Document processing, parameter extraction, Excel/PDF support
+### 06_注文書から情報抽出
+- モード: Advanced Chat
+- 目的: 注文書から構造化情報を抽出
+- 機能: ドキュメント処理、パラメータ抽出、Excel/PDF対応
 
-### 07_複数LLM比較 (Multi-LLM Comparison)
-- **Mode**: Advanced Chat
-- **Purpose**: Compare responses from multiple language models
-- **Features**: Side-by-side model comparison with configurable parameters
+### 07_複数LLM比較
+- モード: Advanced Chat
+- 目的: 複数の言語モデルからの応答を比較
+- 機能: 設定可能なパラメータを持つサイドバイサイドモデル比較
 
-### 08_音声文字起こし (Audio Transcription)
-- **Mode**: Advanced Chat
-- **Purpose**: Transcribe audio files with speaker separation
-- **Features**: Audio processing, speaker identification
+### 08_音声文字起こし
+- モード: Advanced Chat
+- 目的: 話者分離を伴う音声ファイルの文字起こし
+- 機能: 音声処理、話者識別
 
-### 09_PDF文字起こし（AIなし）(PDF Text Extraction - No AI)
-- **Mode**: Workflow
-- **Purpose**: Extract text from PDF documents without AI processing
-- **Features**: Direct PDF text extraction pipeline
+### 09_PDF文字起こし（AIなし）
+- モード: Workflow
+- 目的: AI処理なしでPDFドキュメントからテキストを抽出
+- 機能: 直接PDF文字抽出パイプライン
 
-## 🛠️ Technical Details
+## 🛠️ 技術詳細
 
-### Platform
-- **Framework**: Dify AI Platform
-- **Version**: 0.1.5 - 0.3.0
-- **Language**: Japanese
+### プラットフォーム
+- フレームワーク: Dify AIプラットフォーム
+- バージョン: 0.1.5 - 0.3.0
+- 言語: 日本語
 
-### AI Models
-- **Primary**: GPT-4o, GPT-4o-mini
-- **Provider**: OpenAI
-- **Configuration**: Customizable temperature settings (typically 0.7)
+### AIモデル
+- 主要モデル: GPT-4o、GPT-4o-mini
+- プロバイダー: OpenAI
+- 設定: カスタマイズ可能な温度設定（通常0.7）
 
-### File Support
-- **Documents**: PDF, Excel (.xlsx), Word (.docx)
-- **Images**: PNG, JPG, GIF (up to 10MB)
-- **Audio**: M4A and other common formats
-- **Video**: Up to 100MB
-- **Batch Processing**: Up to 5 files
+### ファイルサポート
+- ドキュメント: PDF、Excel（.xlsx）、Word（.docx）
+- 画像: PNG、JPG、GIF（最大10MB）
+- 音声: M4Aおよびその他の一般的な形式
+- 動画: 最大100MB
+- バッチ処理: 最大5ファイル
 
-## 🚀 Getting Started
+## 🚀 はじめに
 
-1. Import the desired YAML configuration file into your Dify platform
-2. Configure the OpenAI API settings
-3. Upload any required knowledge base documents (for RAG applications)
-4. Test the application with the provided sample data
+1. 希望するYAML設定ファイルをDifyプラットフォームにインポート
+2. OpenAI API設定を構成
+3. 必要なナレッジベースドキュメントをアップロード（RAGアプリケーション用）
+4. 提供されたサンプルデータでアプリケーションをテスト
 
-## 📄 Configuration Structure
+## 📄 設定構造
 
-Each application includes:
-- **App metadata**: Name, description, icon
-- **Workflow definition**: Node-based logic with conversation variables
-- **Feature settings**: File upload, speech processing, UI components
-- **Sample data**: Test files and input examples
+各アプリケーションには以下が含まれます：
+- アプリメタデータ: 名前、説明、アイコン
+- ワークフロー定義: 会話変数を持つノードベースロジック
+- 機能設定: ファイルアップロード、音声処理、UIコンポーネント
+- サンプルデータ: テストファイルと入力例
 
-## 🔧 Development
+## 🔧 開発
 
-### Adding New Applications
-1. Create a numbered directory with Japanese name
-2. Include YAML workflow configuration
-3. Add sample data files for testing
-4. Follow existing naming conventions
+### 新しいアプリケーションの追加
+1. 日本語名で番号付きディレクトリを作成
+2. YAMLワークフロー設定を含める
+3. テスト用サンプルデータファイルを追加
+4. 既存の命名規則に従う
 
-### Customization
-- Modify `conversation_variables` for data persistence
-- Adjust `temperature` settings for creativity control
-- Configure `file_upload` features for document processing
-- Update prompts and responses for specific use cases
+### カスタマイズ
+- データ永続化のため`conversation_variables`を変更
+- 創造性制御のため`temperature`設定を調整
+- ドキュメント処理のため`file_upload`機能を設定
+- 特定のユースケースに合わせてプロンプトとレスポンスを更新
 
-## 📋 Requirements
+## 📋 要件
 
-- Dify Platform access
-- OpenAI API key
-- Japanese language support in your environment
+- Difyプラットフォームへのアクセス
+- OpenAI APIキー
+- 環境での日本語サポート
 
-## 🤝 Contributing
+## 🤝 貢献
 
-This repository contains business-focused AI applications. When contributing:
-- Follow Japanese naming conventions
-- Test with Japanese language inputs
-- Include sample data for new applications
-- Document any new workflow patterns
+このリポジトリにはビジネス向けAIアプリケーションが含まれています。貢献する際は：
+- 日本語命名規則に従う
+- 日本語入力でテストする
+- 新しいアプリケーション用にサンプルデータを含める
+- 新しいワークフローパターンを文書化する
 
-## 📞 Support
+## 📞 サポート
 
-For questions about specific applications or configuration, refer to the individual YAML files and sample data in each directory.
+特定のアプリケーションや設定に関する質問については、各ディレクトリ内の個別のYAMLファイルとサンプルデータを参照してください。
