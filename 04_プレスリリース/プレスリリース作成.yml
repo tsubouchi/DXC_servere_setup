@@ -1,0 +1,350 @@
+app:
+  description: LLM同士でフィードバックさせることで、ブラッシュアップされたプレスリリースを作成します。
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: プレスリリース作成
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        sourceType: start
+        targetType: llm
+      id: 1740504001832-llm
+      selected: false
+      source: '1740504001832'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: answer
+      id: 1740504153029-source-answer-target
+      selected: false
+      source: '1740504153029'
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: answer
+      id: llm-source-1740504506449-target
+      selected: false
+      source: llm
+      sourceHandle: source
+      target: '1740504506449'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: answer
+        targetType: llm
+      id: 1740504506449-source-1740504006401-target
+      selected: false
+      source: '1740504506449'
+      sourceHandle: source
+      target: '1740504006401'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: answer
+      id: 1740504006401-source-1740504512887-target
+      selected: false
+      source: '1740504006401'
+      sourceHandle: source
+      target: '1740504512887'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: answer
+        targetType: llm
+      id: 1740504512887-source-1740504153029-target
+      selected: false
+      source: '1740504512887'
+      sourceHandle: source
+      target: '1740504153029'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 開始
+        type: start
+        variables: []
+      height: 54
+      id: '1740504001832'
+      position:
+        x: 334
+        y: 185.12462430118262
+      positionAbsolute:
+        x: 334
+        y: 185.12462430118262
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: '## ユーザーの入力
+
+            {{#sys.query#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 10
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: openai
+        prompt_template:
+        - id: cea761a6-79f2-481c-ae3c-e6bbca380751
+          role: system
+          text: ユーザーの入力に基づいて、プレスリリースを作成してください。
+        selected: false
+        title: 作成（1回目）
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: llm
+      position:
+        x: 334
+        y: 251.5
+      positionAbsolute:
+        x: 334
+        y: 251.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1740504153029.text#}}'
+        desc: ''
+        selected: false
+        title: 最終出力
+        type: answer
+        variables: []
+      height: 103
+      id: answer
+      position:
+        x: 877.3135168573519
+        y: 362.010222136186
+      positionAbsolute:
+        x: 877.3135168573519
+        y: 362.010222136186
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: openai
+        prompt_template:
+        - id: bc7b779d-0e93-4fae-986c-520a67a8f085
+          role: system
+          text: プレスリリースの初稿をブラッシュアップするための改善箇所をリストアップしてください。
+        - id: 9b3d142b-6190-4fd8-ae6b-204661b04fe9
+          role: user
+          text: '## 初稿
+
+            {{#llm.text#}}'
+        selected: false
+        title: フィードバック
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1740504006401'
+      position:
+        x: 611.3447845680386
+        y: 251.5
+      positionAbsolute:
+        x: 611.3447845680386
+        y: 251.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: openai
+        prompt_template:
+        - id: 9f46514c-d1ea-44cf-b43a-7af85e821426
+          role: system
+          text: フィードバックを元に初稿をブラッシュアップしてください。
+        - id: 21e78303-c812-4bdb-b793-002a71f147a5
+          role: user
+          text: '## 初稿
+
+            {{#llm.text#}}
+
+
+            ## フィードバック
+
+            {{#1740504006401.text#}}
+
+            '
+        selected: false
+        title: 作成（2回目）
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1740504153029'
+      position:
+        x: 877.3135168573519
+        y: 251.5
+      positionAbsolute:
+        x: 877.3135168573519
+        y: 251.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#llm.text#}}
+
+
+          ---
+
+          '
+        desc: ''
+        selected: false
+        title: 中間出力（1回目）
+        type: answer
+        variables: []
+      height: 103
+      id: '1740504506449'
+      position:
+        x: 334
+        y: 362.010222136186
+      positionAbsolute:
+        x: 334
+        y: 362.010222136186
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1740504006401.text#}}
+
+
+          ---
+
+          '
+        desc: ''
+        selected: false
+        title: 中間出力（フィードバック）
+        type: answer
+        variables: []
+      height: 103
+      id: '1740504512887'
+      position:
+        x: 611.3447845680386
+        y: 362.010222136186
+      positionAbsolute:
+        x: 611.3447845680386
+        y: 362.010222136186
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -115.23825269279246
+      y: 49.40011039642542
+      zoom: 1.1029954404690923

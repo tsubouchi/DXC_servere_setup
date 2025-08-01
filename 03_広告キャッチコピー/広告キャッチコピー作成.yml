@@ -1,0 +1,273 @@
+app:
+  description: ペルソナのニーズを想定し、広告用のキャッチコピーを作成します。
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 広告キャッチコピー作成
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: llm
+      id: 1738586720988-source-1738594697707-target
+      source: '1738586720988'
+      sourceHandle: source
+      target: '1738594697707'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: answer
+      id: 1738594697707-source-1740500040742-target
+      source: '1738594697707'
+      sourceHandle: source
+      target: '1740500040742'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: answer
+        targetType: llm
+      id: 1740500040742-source-1738595115483-target
+      source: '1740500040742'
+      sourceHandle: source
+      target: '1738595115483'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: answer
+      id: 1738595115483-source-1740500064389-target
+      source: '1738595115483'
+      sourceHandle: source
+      target: '1740500064389'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 開始
+        type: start
+        variables: []
+      height: 54
+      id: '1738586720988'
+      position:
+        x: 30
+        y: 260.5
+      positionAbsolute:
+        x: 30
+        y: 260.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: '## 商品内容
+
+            {{#sys.query#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: openai
+        prompt_template:
+        - edition_type: basic
+          id: f26947a7-ad95-4c0e-b380-810adf11c940
+          role: system
+          text: '## 命令
+
+            商品内容を元に、商品のペルソナとニーズを想定してください。
+
+            '
+        selected: false
+        title: ペルソナを想定する
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1738594697707'
+      position:
+        x: 334
+        y: 260.5
+      positionAbsolute:
+        x: 334
+        y: 260.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        memory:
+          query_prompt_template: '## 商品内容
+
+            {{#sys.query#}}
+
+
+            ## 想定ペルソナ
+
+            {{#1738594697707.text#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 50
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: openai
+        prompt_template:
+        - id: 3ae8db75-9b3e-4e83-8490-28512b0375a0
+          role: system
+          text: '## 命令
+
+            広告用のキャッチコピーを作りたいです。
+
+            商品内容と想定ペルソナに基づいて、広告向けキャッチコピーと狙いの案を３つ作成してください。'
+        selected: false
+        title: キャッチコピーを考える
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1738595115483'
+      position:
+        x: 942
+        y: 260.5
+      positionAbsolute:
+        x: 942
+        y: 260.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1738594697707.text#}}
+
+
+          ---
+
+
+          '
+        desc: ''
+        selected: false
+        title: 中間出力
+        type: answer
+        variables: []
+      height: 103
+      id: '1740500040742'
+      position:
+        x: 638
+        y: 260.5
+      positionAbsolute:
+        x: 638
+        y: 260.5
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1738595115483.text#}}'
+        desc: ''
+        selected: false
+        title: 最終出力
+        type: answer
+        variables: []
+      height: 103
+      id: '1740500064389'
+      position:
+        x: 1246
+        y: 260.5
+      positionAbsolute:
+        x: 1246
+        y: 260.5
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 42.8847445955804
+      y: 117.70464215595132
+      zoom: 0.910939298809359

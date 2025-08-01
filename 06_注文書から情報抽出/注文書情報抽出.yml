@@ -1,0 +1,652 @@
+app:
+  description: AIを利用して注文書からの情報を構造化します。
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: 注文書情報抽出
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.0.11@390c87cc0f17370a70d3b214cd71a8de81fe9d6b52e6a38287acde034138b672
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables:
+  - description: "例：\n{\n    \"description\": \"商品A\",\n    \"unit_price\": 20,\n\
+      \    \"quantity\": 10,\n    \"amount\": 200\n}"
+    id: a3c13c49-6954-4743-9816-471c1bca230b
+    name: item_list
+    selector:
+    - conversation
+    - item_list
+    value: []
+    value_type: array[object]
+  - description: 件名
+    id: 6f1339ff-fa18-4c4c-a13a-65f2175f1a20
+    name: subject
+    selector:
+    - conversation
+    - subject
+    value: ''
+    value_type: string
+  - description: 納期
+    id: 7913388c-cdf9-4ba9-b79a-4b692e29eda3
+    name: delivery_date
+    selector:
+    - conversation
+    - delivery_date
+    value: ''
+    value_type: string
+  - description: 取引先
+    id: becabb3b-8f85-4ec0-9ca6-6619eb58d6c8
+    name: recipient_company
+    selector:
+    - conversation
+    - recipient_company
+    value: ''
+    value_type: string
+  - description: 注文日
+    id: fd0bed3f-48bd-4b23-a7f9-a7c0cf8f11f5
+    name: order_date
+    selector:
+    - conversation
+    - order_date
+    value: ''
+    value_type: string
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions: []
+      allowed_file_types:
+      - document
+      allowed_file_upload_methods:
+      - remote_url
+      - local_file
+      enabled: true
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: '注文書をアップロードして「分析を開始」ボタンを押してください。
+
+
+      <button data-message="分析を開始">分析を開始</button>'
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: document-extractor
+      id: 1741618548183-false-17416375344910-target
+      selected: false
+      source: '1741618548183'
+      sourceHandle: 'false'
+      target: '17416375344910'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: document-extractor
+        targetType: parameter-extractor
+      id: 17416375344910-source-17416375401730-target
+      selected: false
+      source: '17416375344910'
+      sourceHandle: source
+      target: '17416375401730'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: parameter-extractor
+        targetType: assigner
+      id: 17416375401730-source-17416375482070-target
+      selected: false
+      source: '17416375401730'
+      sourceHandle: source
+      target: '17416375482070'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: assigner
+        targetType: template-transform
+      id: 17416375482070-source-17416375556310-target
+      selected: false
+      source: '17416375482070'
+      sourceHandle: source
+      target: '17416375556310'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: template-transform
+        targetType: answer
+      id: 17416375556310-source-1741618595876-target
+      selected: false
+      source: '17416375556310'
+      sourceHandle: source
+      target: '1741618595876'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: if-else
+      id: 1741618548183-true-1741637696244-target
+      selected: false
+      source: '1741618548183'
+      sourceHandle: 'true'
+      target: '1741637696244'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: answer
+      id: 1741637696244-false-1741637705312-target
+      selected: false
+      source: '1741637696244'
+      sourceHandle: 'false'
+      target: '1741637705312'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: template-transform
+      id: 1741637696244-true-17416378223790-target
+      selected: false
+      source: '1741637696244'
+      sourceHandle: 'true'
+      target: '17416378223790'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: template-transform
+        targetType: answer
+      id: 17416378223790-source-1741618558583-target
+      selected: false
+      source: '17416378223790'
+      sourceHandle: source
+      target: '1741618558583'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: start
+        targetType: if-else
+      id: 1741547290552-source-1741618548183-target
+      selected: false
+      source: '1741547290552'
+      sourceHandle: source
+      target: '1741618548183'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: answer
+        targetType: document-extractor
+      id: 1741637705312-source-17416375344910-target
+      selected: false
+      source: '1741637705312'
+      sourceHandle: source
+      target: '17416375344910'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 開始
+        type: start
+        variables:
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - document
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          label: 入力ファイル
+          max_length: 48
+          options: []
+          required: true
+          type: file
+          variable: input_file
+      height: 90
+      id: '1741547290552'
+      position:
+        x: 30
+        y: 300
+      positionAbsolute:
+        x: 30
+        y: 300
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: '>'
+            id: 83c12bc6-51c4-459a-8ce9-132f657d61fc
+            value: '0'
+            varType: number
+            variable_selector:
+            - sys
+            - dialogue_count
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 初回のメッセージか判定
+        type: if-else
+      height: 126
+      id: '1741618548183'
+      position:
+        x: 334
+        y: 300
+      positionAbsolute:
+        x: 334
+        y: 300
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '以下の情報を登録しました。
+
+          {{#17416378223790.output#}}'
+        desc: ''
+        selected: false
+        title: 回答
+        type: answer
+        variables: []
+      height: 121
+      id: '1741618558583'
+      position:
+        x: 1228.368659551069
+        y: 93.4846742919521
+      positionAbsolute:
+        x: 1228.368659551069
+        y: 93.4846742919521
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '以下の情報を取得しました。
+
+          {{#17416375556310.output#}}
+
+
+          登録してもよいですか？
+
+          <button data-message="【はい】">はい</button> <button data-message="【いいえ】">いいえ</button>'
+        desc: ''
+        selected: false
+        title: 回答
+        type: answer
+        variables: []
+      height: 185
+      id: '1741618595876'
+      position:
+        x: 2462
+        y: 300
+      positionAbsolute:
+        x: 2462
+        y: 300
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        isInIteration: true
+        is_array_file: false
+        iteration_id: '1741547950457'
+        selected: false
+        title: テキスト抽出ツール
+        type: document-extractor
+        variable_selector:
+        - '1741547290552'
+        - input_file
+      height: 92
+      id: '17416375344910'
+      position:
+        x: 1191.3732505404175
+        y: 488.1377328550755
+      positionAbsolute:
+        x: 1191.3732505404175
+        y: 488.1377328550755
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        desc: ''
+        instruction: ''
+        isInIteration: true
+        iteration_id: '1741547950457'
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-4o
+          provider: langgenius/openai/openai
+        parameters:
+        - description: 注文日
+          name: order_date
+          required: false
+          type: string
+        - description: 取引先
+          name: recipient_company
+          required: false
+          type: string
+        - description: 件名
+          name: subject
+          required: false
+          type: string
+        - description: 納期
+          name: delivery_date
+          required: false
+          type: string
+        - description: '#商品リスト
+
+
+            ## 商品の属性
+
+            - description
+
+            - unit_price
+
+            - quantity
+
+            - amount'
+          name: item_list
+          required: false
+          type: array[object]
+        query:
+        - '17416375344910'
+        - text
+        reasoning_mode: prompt
+        selected: false
+        title: パラメーター抽出
+        type: parameter-extractor
+        variables: []
+        vision:
+          enabled: false
+      height: 90
+      id: '17416375401730'
+      position:
+        x: 1550
+        y: 300
+      positionAbsolute:
+        x: 1550
+        y: 300
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        desc: ''
+        isInIteration: true
+        items:
+        - input_type: variable
+          operation: over-write
+          value:
+          - '17416375401730'
+          - item_list
+          variable_selector:
+          - conversation
+          - item_list
+          write_mode: over-write
+        - input_type: variable
+          operation: over-write
+          value:
+          - '17416375401730'
+          - subject
+          variable_selector:
+          - conversation
+          - subject
+          write_mode: over-write
+        - input_type: variable
+          operation: over-write
+          value:
+          - '17416375401730'
+          - delivery_date
+          variable_selector:
+          - conversation
+          - delivery_date
+          write_mode: over-write
+        - input_type: variable
+          operation: over-write
+          value:
+          - '17416375401730'
+          - recipient_company
+          variable_selector:
+          - conversation
+          - recipient_company
+          write_mode: over-write
+        - input_type: variable
+          operation: over-write
+          value:
+          - '17416375401730'
+          - order_date
+          variable_selector:
+          - conversation
+          - order_date
+          write_mode: over-write
+        iteration_id: '1741547950457'
+        selected: false
+        title: 変数代入
+        type: assigner
+        version: '2'
+      height: 200
+      id: '17416375482070'
+      position:
+        x: 1854
+        y: 300
+      positionAbsolute:
+        x: 1854
+        y: 300
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        desc: ''
+        isInIteration: true
+        iteration_id: '1741547950457'
+        selected: false
+        template: "注文日：{{ order_date }}\r\n件名：{{ subject }}\r\n取引先会社：{{ recipient_company\
+          \ }}\r\n納期：{{ delivery_date }}\r\n\r\n商品一覧：{% for item in item_list %}\r\
+          \n商品名: {{item.description}}\r\n単価: {{item.unit_price}}円\r\n数量: {{item.quantity}}個\r\
+          \n金額: {{item.amount}}円\r\n{% endfor %}"
+        title: テンプレート
+        type: template-transform
+        variables:
+        - value_selector:
+          - conversation
+          - order_date
+          variable: order_date
+        - value_selector:
+          - conversation
+          - subject
+          variable: subject
+        - value_selector:
+          - conversation
+          - delivery_date
+          variable: delivery_date
+        - value_selector:
+          - conversation
+          - recipient_company
+          variable: recipient_company
+        - value_selector:
+          - conversation
+          - item_list
+          variable: item_list
+      height: 54
+      id: '17416375556310'
+      position:
+        x: 2158
+        y: 300
+      positionAbsolute:
+        x: 2158
+        y: 300
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: contains
+            id: db93a5ea-b2a2-497f-b63a-2f37369f2efe
+            value: 【はい】
+            varType: string
+            variable_selector:
+            - sys
+            - query
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 登録するか判定
+        type: if-else
+      height: 126
+      id: '1741637696244'
+      position:
+        x: 658.0706146093022
+        y: 193.83774733846298
+      positionAbsolute:
+        x: 658.0706146093022
+        y: 193.83774733846298
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '登録せずに再度抽出を開始します。
+
+
+          '
+        desc: ''
+        selected: false
+        title: 回答
+        type: answer
+        variables: []
+      height: 102
+      id: '1741637705312'
+      position:
+        x: 938.9122131370307
+        y: 217.29260756341438
+      positionAbsolute:
+        x: 938.9122131370307
+        y: 217.29260756341438
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        isInIteration: true
+        iteration_id: '1741547950457'
+        selected: false
+        template: "注文日：{{ order_date }}\r\n件名：{{ subject }}\r\n取引先会社：{{ recipient_company\
+          \ }}\r\n納期：{{ delivery_date }}\r\n商品一覧：\r\n{% for item in item_list %}\r\
+          \n商品名: {{item.description}}\r\n単価: {{item.unit_price}}円\r\n数量: {{item.quantity}}個\r\
+          \n金額: {{item.amount}}円\r\n{% endfor %}"
+        title: テンプレート
+        type: template-transform
+        variables:
+        - value_selector:
+          - conversation
+          - order_date
+          variable: order_date
+        - value_selector:
+          - conversation
+          - subject
+          variable: subject
+        - value_selector:
+          - conversation
+          - delivery_date
+          variable: delivery_date
+        - value_selector:
+          - conversation
+          - recipient_company
+          variable: recipient_company
+        - value_selector:
+          - conversation
+          - item_list
+          variable: item_list
+      height: 54
+      id: '17416378223790'
+      position:
+        x: 948.1755737259391
+        y: 92.60488006762384
+      positionAbsolute:
+        x: 948.1755737259391
+        y: 92.60488006762384
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    viewport:
+      x: -125.5990644839884
+      y: 311.19268064481037
+      zoom: 0.46957477870879727

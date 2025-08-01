@@ -1,0 +1,318 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: 02_音声文字起こし_話者分離
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/gemini:0.3.0@3d5be07581c53609a49d2bbb47be98c2e10820591bfc99f686b005d2c1ef95d9
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - remote_url
+      - local_file
+      enabled: true
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: tool
+      id: 1753619244665-source-1753619485830-target
+      source: '1753619244665'
+      sourceHandle: source
+      target: '1753619485830'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: tool
+        targetType: llm
+      id: 1753619485830-source-1753619717463-target
+      source: '1753619485830'
+      sourceHandle: source
+      target: '1753619717463'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 1753619717463-source-1753619246478-target
+      source: '1753619717463'
+      sourceHandle: source
+      target: '1753619246478'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: Start
+        type: start
+        variables:
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - audio
+          - video
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          label: Sounds
+          max_length: 48
+          options: []
+          required: true
+          type: file
+          variable: Sounds
+      height: 90
+      id: '1753619244665'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1753619717463'
+          - text
+          variable: text
+        selected: false
+        title: End
+        type: end
+      height: 90
+      id: '1753619246478'
+      position:
+        x: 984
+        y: 282
+      positionAbsolute:
+        x: 984
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_team_authorization: true
+        output_schema: null
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: The audio file to be converted.
+            ja_JP: The audio file to be converted.
+            pt_BR: The audio file to be converted.
+            zh_Hans: 要转换的音频文件。
+          label:
+            en_US: Audio File
+            ja_JP: Audio File
+            pt_BR: Audio File
+            zh_Hans: 音频文件
+          llm_description: The audio file to be converted.
+          max: null
+          min: null
+          name: audio_file
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: file
+        - auto_generate: null
+          default: null
+          form: form
+          human_description:
+            en_US: All available ASR models. You can config model in the Model Provider
+              of Settings.
+            ja_JP: All available ASR models. You can config model in the Model Provider
+              of Settings.
+            pt_BR: All available ASR models. You can config model in the Model Provider
+              of Settings.
+            zh_Hans: 所有可用的 ASR 模型。你可以在设置中的模型供应商里配置。
+          label:
+            en_US: Model
+            ja_JP: Model
+            pt_BR: Model
+            zh_Hans: Model
+          llm_description: null
+          max: null
+          min: null
+          name: model
+          options:
+          - label:
+              en_US: gpt-4o-mini-transcribe(langgenius/openai/openai)
+              ja_JP: gpt-4o-mini-transcribe(langgenius/openai/openai)
+              pt_BR: gpt-4o-mini-transcribe(langgenius/openai/openai)
+              zh_Hans: gpt-4o-mini-transcribe(langgenius/openai/openai)
+            value: langgenius/openai/openai#gpt-4o-mini-transcribe
+          - label:
+              en_US: gpt-4o-transcribe(langgenius/openai/openai)
+              ja_JP: gpt-4o-transcribe(langgenius/openai/openai)
+              pt_BR: gpt-4o-transcribe(langgenius/openai/openai)
+              zh_Hans: gpt-4o-transcribe(langgenius/openai/openai)
+            value: langgenius/openai/openai#gpt-4o-transcribe
+          - label:
+              en_US: whisper-1(langgenius/openai/openai)
+              ja_JP: whisper-1(langgenius/openai/openai)
+              pt_BR: whisper-1(langgenius/openai/openai)
+              zh_Hans: whisper-1(langgenius/openai/openai)
+            value: langgenius/openai/openai#whisper-1
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: select
+        params:
+          audio_file: ''
+          model: ''
+        provider_id: audio
+        provider_name: audio
+        provider_type: builtin
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 1000
+        selected: false
+        title: STT
+        tool_configurations:
+          model:
+            type: constant
+            value: langgenius/openai/openai#whisper-1
+        tool_description: Convert audio file to text.
+        tool_label: Speech To Text
+        tool_name: asr
+        tool_node_version: '2'
+        tool_parameters:
+          audio_file:
+            type: variable
+            value:
+            - '1753619244665'
+            - Sounds
+        type: tool
+      height: 119
+      id: '1753619485830'
+      position:
+        x: 384
+        y: 282
+      positionAbsolute:
+        x: 384
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        default_value:
+        - key: text
+          type: string
+          value: ''
+        desc: ''
+        error_strategy: default-value
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gemini-2.5-pro
+          provider: langgenius/gemini/google
+        prompt_template:
+        - id: 54c66f00-8770-4968-90fa-5c6c50d3b53c
+          role: system
+          text: '{{#1753619485830.text#}}から、不要な内容、不適切な日本語を削除し、内容を完全な文字起こしする。話している内容から話者分離をして、回答の前に話者の名前を記入する。
+
+
+            #出力要件：
+
+            完全な文字起こし
+
+
+            #話者分離
+
+            話者が不明の場合、AとかBという名前にする。'
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 1000
+        selected: false
+        title: 文字起こしと整形と話者分離
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 155
+      id: '1753619717463'
+      position:
+        x: 684
+        y: 282
+      positionAbsolute:
+        x: 684
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 2.957254827247084
+      y: 224.96611422107577
+      zoom: 0.44352870268784167
