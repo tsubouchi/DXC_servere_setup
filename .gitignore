@@ -34,3 +34,17 @@ node_modules/
 __pycache__/
 *.pyc
 *.pyo
+
+# Generated user directories and files
+users/
+workspaces_setup_*/
+individual_scripts/workspaces_setup_*/
+
+# Distribution files
+distribution/
+
+# Sensitive documentation
+login_setup.md
+
+# Note: Excel and PPT files will be tracked in this repository
+# Only specific sensitive files are excluded
